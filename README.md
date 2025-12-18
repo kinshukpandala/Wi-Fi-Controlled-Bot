@@ -1,6 +1,6 @@
-# Wi-Fi Controlled RC Car (ESP8266 + L298N Motor Driver)
+# Wi-Fi Controlled Bot (ESP8266 + L298N Motor Driver)
 
-This repository contains the code and resources for a **Wi-Fi Controlled RC Car** built using the **ESP8266 microcontroller** and the **L298N motor driver**. The project was developed as part of our engineering coursework for **Project Exhibition-I**.
+This repository contains the code and resources for a **Wi-Fi Controlled Bot** built using the **ESP8266 microcontroller** and the **L298N motor driver**. The project was developed as part of our engineering coursework for **Project Exhibition-I**.
 
 ## Overview
 The project demonstrates the integration of hardware and software to create a simple yet functional **remote-controlled car**. By utilizing the **ESP8266** for Wi-Fi connectivity and the **L298N motor driver** for motor control, we enabled seamless real-time communication between the car and the controller through a mobile app interface. The system allows for precise control of the car's movements remotely via Wi-Fi.
