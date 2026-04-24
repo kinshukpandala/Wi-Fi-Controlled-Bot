@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ESP32 Robot Control</title>
+</head>
+<body>
+
+<h2>Robot Control</h2>
+
+<!-- Buttons (for mobile) -->
+<button onclick="send('F')">Forward</button>
+<button onclick="send('B')">Backward</button>
+<button onclick="send('L')">Left</button>
+<button onclick="send('R')">Right</button>
+<button onclick="send('S')">Stop</button>
+
+<p id="status">Disconnected</p>
+
+<script>
+let ws = new WebSocket("ws://192.168.4.1:81/");
+
+ws.onopen = () => {
+  document.getElementById("status").innerText = "Connected";
+};
+
+// =======================
+// 1. BUTTON CONTROL
+// =======================
+function send(cmd) {
+  ws.send(cmd);
+}
+
+// =======================
+// 2. KEYBOARD (WASD)
+// =======================
+document.addEventListener("keydown", (e) => {
+  switch(e.key.toLowerCase()) {
+    case 'w': send('F'); break;
+    case 's': send('B'); break;
+    case 'a': send('L'); break;
+    case 'd': send('R'); break;
+  }
+});
+
+document.addEventListener("keyup", () => {
+  send('S'); // stop on release
+});
+
+// =======================
+// 3. GAMEPAD SUPPORT
+// =======================
+function pollGamepad() {
+  let gp = navigator.getGamepads()[0];
+  if (!gp) return;
+
+  // Left joystick
+  let x = gp.axes[0];
+  let y = gp.axes[1];
+
+  if (y < -0.5) send('F');
+  else if (y > 0.5) send('B');
+  else if (x < -0.5) send('L');
+  else if (x > 0.5) send('R');
+  else send('S');
+}
+
+setInterval(pollGamepad, 100);
+</script>
+
+</body>
+</html>
